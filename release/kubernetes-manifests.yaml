@@ -452,12 +452,17 @@ spec:
       terminationGracePeriodSeconds: 5
       containers:
       - name: server
-        image: gcr.io/google-samples/microservices-demo/cartservice:v0.2.3
+        image: cartservice
+        imagePullPolicy: Never
         ports:
         - containerPort: 7070
         env:
         - name: REDIS_ADDR
           value: "redis-cart:6379"
+        securityContext:
+          capabilities:
+            add:
+            - SYS_PTRACE          
         resources:
           requests:
             cpu: 200m
@@ -713,7 +718,8 @@ spec:
       terminationGracePeriodSeconds: 5
       containers:
       - name: server
-        image: gcr.io/google-samples/microservices-demo/adservice:v0.2.3
+        image: adservice
+        imagePullPolicy: Never
         ports:
         - containerPort: 9555
         env:
@@ -725,6 +731,10 @@ spec:
         #   value: "1"
         # - name: JAEGER_SERVICE_ADDR
         #   value: "jaeger-collector:14268"
+        securityContext:
+          capabilities:
+            add:
+            - SYS_PTRACE        
         resources:
           requests:
             cpu: 200m

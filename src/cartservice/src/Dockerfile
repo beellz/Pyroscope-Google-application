@@ -30,4 +30,11 @@ RUN GRPC_HEALTH_PROBE_VERSION=v0.3.6 && \
 WORKDIR /app
 COPY --from=builder /cartservice .
 ENV ASPNETCORE_URLS http://*:7070
-ENTRYPOINT ["/app/cartservice"]
+
+COPY --from=pyroscope/pyroscope:latest /usr/bin/pyroscope /usr/bin/pyroscope
+
+ENV PYROSCOPE_SERVER_ADDRESS=http://pyroscope:4040
+ENV PYROSCOPE_APPLICATION_NAME=cart.app
+ENV PYROSCOPE_LOG_LEVEL=debug
+
+ENTRYPOINT ["pyroscope", "exec", "-spy-name", "dotnetspy" ,"/app/cartservice"]

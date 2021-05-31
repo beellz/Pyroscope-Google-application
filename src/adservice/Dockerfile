@@ -44,4 +44,12 @@ WORKDIR /app
 COPY --from=builder /app .
 
 EXPOSE 9555
-ENTRYPOINT ["/app/build/install/hipstershop/bin/AdService"]
+
+# this copies pyroscope binary from pyroscope image to your image:
+COPY --from=pyroscope/pyroscope:latest /usr/bin/pyroscope /usr/bin/pyroscope
+
+# this sets the pyroscope server address as well as the app name, make sure you change these:
+ENV PYROSCOPE_SERVER_ADDRESS=http://pyroscope:4040
+ENV PYROSCOPE_APPLICATION_NAME=java.app
+
+CMD ["pyroscope", "exec", "-spy-name" , "ebpfspy", "/app/build/install/hipstershop/bin/AdService"]
