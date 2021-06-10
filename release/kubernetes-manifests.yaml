@@ -97,8 +97,8 @@ spec:
       serviceAccountName: default
       containers:
         - name: server
-          image: checkoutservice
-          imagePullPolicy: Never
+          image: beellzrocks/checkoutservice
+         # imagePullPolicy: Never
           ports:
           - containerPort: 5050
           readinessProbe:
@@ -172,8 +172,8 @@ spec:
       terminationGracePeriodSeconds: 5
       containers:
       - name: server
-        image: recommendationservice
-        imagePullPolicy: Never
+        image: beellzrocks/recommendationservice
+       # imagePullPolicy: Never
         ports:
         - containerPort: 8080
         readinessProbe:
@@ -191,6 +191,10 @@ spec:
           value: "8080"
         - name: PRODUCT_CATALOG_SERVICE_ADDR
           value: "productcatalogservice:3550"
+        - name: PYROSCOPE_SERVER_ADDRESS
+          value: "http://pyroscope:4040"
+        - name: PYROSCOPE_APPLICATION_NAME
+          value: "recommendation_server.app"
         # - name: DISABLE_TRACING
         #   value: "1"
         # - name: DISABLE_PROFILER
@@ -240,8 +244,8 @@ spec:
       serviceAccountName: default
       containers:
         - name: server
-          image: frontend
-          imagePullPolicy: Never
+          image: beellzrocks/frontend
+          #imagePullPolicy: Never
           ports:
           - containerPort: 8080
           readinessProbe:
@@ -392,8 +396,8 @@ spec:
       terminationGracePeriodSeconds: 5
       containers:
       - name: server
-        image: productcatalogservice
-        imagePullPolicy: Never
+        image: beellzrocks/productcatalogservice
+        # imagePullPolicy: Never
         ports:
         - containerPort: 3550
         env:
@@ -456,13 +460,19 @@ spec:
       terminationGracePeriodSeconds: 5
       containers:
       - name: server
-        image: cartservice
-        imagePullPolicy: Never
+        image: beellzrocks/cartservice
+        #imagePullPolicy: Never
         ports:
         - containerPort: 7070
         env:
         - name: REDIS_ADDR
           value: "redis-cart:6379"
+        - name: PYROSCOPE_APPLICATION_NAME
+          value: "cart.dotnet.app"
+        - name: PYROSCOPE_SERVER_ADDRESS
+          value: "http://pyroscope:4040/"
+        - name: PYROSCOPE_LOG_LEVEL
+          value: "debug"
         securityContext:
           capabilities:
             add:
@@ -605,8 +615,8 @@ spec:
       serviceAccountName: default
       containers:
       - name: server
-        image: shippingservice
-        imagePullPolicy: Never
+        image: beellzrocks/shippingservice
+        #imagePullPolicy: Never
         ports:
         - containerPort: 50051
         env:
@@ -722,8 +732,8 @@ spec:
       terminationGracePeriodSeconds: 5
       containers:
       - name: server
-        image: adservice
-        imagePullPolicy: Never
+        image: beellzrocks/adservice
+        # imagePullPolicy: Never
         ports:
         - containerPort: 9555
         env:
@@ -734,11 +744,7 @@ spec:
         # - name: DISABLE_TRACING
         #   value: "1"
         # - name: JAEGER_SERVICE_ADDR
-        #   value: "jaeger-collector:14268"
-        securityContext:
-          capabilities:
-            add:
-            - SYS_PTRACE        
+        #   value: "jaeger-collector:14268"        
         resources:
           requests:
             cpu: 200m

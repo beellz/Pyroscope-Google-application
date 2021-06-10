@@ -28,13 +28,17 @@ spec:
       serviceAccountName: default
       containers:
       - name: server
-        image: shippingservice
+        image: beellzrocks/shippingservice
         imagePullPolicy: Never
         ports:
         - containerPort: 50051
         env:
         - name: PORT
           value: "50051"
+        - name: APPLICATION_NAME
+          value: "shipping.service.app"
+        - name: SERVER_ADDRESS
+          value: "http://pyroscope:4040"           
         # - name: DISABLE_STATS
         #   value: "1"
         # - name: DISABLE_TRACING

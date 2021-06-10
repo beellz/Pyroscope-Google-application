@@ -29,8 +29,8 @@ spec:
       terminationGracePeriodSeconds: 5
       containers:
       - name: server
-        image: adservice
-        imagePullPolicy: Never
+        image: gcr.io/google-samples/microservices-demo/adservice:v0.2.3
+        #imagePullPolicy: Never
         ports:
         - containerPort: 9555
         env:

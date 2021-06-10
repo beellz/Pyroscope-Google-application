@@ -32,8 +32,8 @@ spec:
       restartPolicy: Always
       containers:
       - name: main
-        image: loadgenerator
-        imagePullPolicy: Never
+        image: gcr.io/google-samples/microservices-demo/loadgenerator:v0.2.3loadgenerator
+        #imagePullPolicy: Never
         env:
         - name: FRONTEND_ADDR
           value: "frontend:80"

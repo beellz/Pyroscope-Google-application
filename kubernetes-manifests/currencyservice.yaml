@@ -29,8 +29,8 @@ spec:
       terminationGracePeriodSeconds: 5
       containers:
       - name: server
-        image: currencyservice
-        imagePullPolicy: Never
+        image: gcr.io/google-samples/microservices-demo/currencyservice:v0.2.3
+        #imagePullPolicy: Never
         ports:
         - name: grpc
           containerPort: 7000
