@@ -5,8 +5,7 @@
 To use Google-microservice with pyroscope we need to do few steps mentioned below 
 
 ### Retagging Docker Images
-Currently, it is in DockerHub under beellzrocks
-Docker images need to build and pushed to repositories. (**Note: Even without Retagging the docker Image you can still run Using docker images by beellzrocks** )
+Docker images need to build and pushed to repositories. (**Note: Even without Retagging the docker Image you can still run Using docker images by beellzrocks**)\
 Dockerfile of each microservice is stored inside their respective folder under the src folder. 
 
 Follow these steps:
