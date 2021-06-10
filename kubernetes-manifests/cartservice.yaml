@@ -42,6 +42,10 @@ spec:
           value: "http://pyroscope:4040/"
         - name: PYROSCOPE_LOG_LEVEL
           value: "debug"
+        securityContext: # this is added as pyroscope need it run properly 
+          capabilities:
+            add:
+            - SYS_PTRACE            
         resources:
           requests:
             cpu: 200m
