@@ -16,7 +16,7 @@ Go to src/emailservice
 
 ```console
 COPY --from=pyroscope/pyroscope:latest /usr/bin/pyroscope /usr/bin/pyroscope
-CMD [ "pyroscope", "exec", "python", "email_server.py ]
+CMD [ "pyroscope", "exec", "python", "email_server.py" ]
 ```
 
 - build Docker image inside the folder using Dockerfile
