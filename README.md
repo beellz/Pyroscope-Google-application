@@ -5,8 +5,9 @@
 To use Google-microservice with pyroscope we need to do few steps mentioned below 
 
 ### Retagging Docker Images
-Docker images need to build and pushed to repositories. (Currently, it is in DockerHub under beellzrocks)\
-Dockerfile of each microservice is stored inside their respective folder under the src folder. \
+Currently, it is in DockerHub under beellzrocks
+Docker images need to build and pushed to repositories. (**Note: Even without Retagging the docker Image you can still run Using docker images by beellzrocks** )
+Dockerfile of each microservice is stored inside their respective folder under the src folder. 
 
 Follow these steps:
 
@@ -24,7 +25,7 @@ docker build . -t <yourRepository/emailservice:version>
 docker push <yourRepository/emailservice:version>
 ```
 
-**For each microservice image that we reatg we need to change its image refrence in the respective manifest**
+**Note: For each microservice image that we retag we need to change its image reference in the respective manifest**
 
 For the Email service we can find the yaml file inside:
 kubernetes-manifests/emailservice.yaml
@@ -36,10 +37,10 @@ kubernetes-manifests/emailservice.yaml
         image: beellzrocks/emailservice  #Change the image with your repository tag
 ```        
 
-## Steps to install microservices and profile it using pyroscope
+## Steps to install microservices and profile them using pyroscope
 
 To install the pyroscope we are going to use the helm chart.\
-[Helm](https://helm.sh) must be installed to use the chart.Please refer to Helm's [documentation](https://helm.sh/docs/) to get started.
+[Helm](https://helm.sh) must be installed to use the chart. Please refer to Helm's [documentation](https://helm.sh/docs/) to get started.
 
  Get the Repo of Pyrscope
 ```console
@@ -96,17 +97,17 @@ Changes to be done in [main.go](./src/frontend/main.go)
 
 ```
 import (
-	pyroscope "github.com/pyroscope-io/pyroscope/pkg/agent/profiler"
+  pyroscope "github.com/pyroscope-io/pyroscope/pkg/agent/profiler"
 )
 
 func main() {
 
-	pyroscope.Start(pyroscope.Config{
-		ApplicationName: os.Getenv("APPLICATION_NAME"),
-		ServerAddress:   os.Getenv("SERVER_ADDRESS"),
-	})
-	/ code here
-)	
+  pyroscope.Start(pyroscope.Config{
+    ApplicationName: os.Getenv("APPLICATION_NAME"),
+    ServerAddress:   os.Getenv("SERVER_ADDRESS"),
+  })
+  / code here
+) 
 ```
 for changes in kubernetes manifest file 
 ref:  [Frontend](./kubernetes-manifests/frontend.yaml.yaml)
@@ -115,7 +116,7 @@ ref:  [Frontend](./kubernetes-manifests/frontend.yaml.yaml)
 ## Microservices we will be profiling using pyroscope
 
 Python:
-* Recommendationservice	
+* Recommendationservice 
 * Emailservice
 
 Go:
