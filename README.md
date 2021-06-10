@@ -67,7 +67,7 @@ Now you can access pyroscope UI on http://localhost:8080
 
 ## Changes we did to integrate microservices with pyroscope
 
-**For Python**
+**Python**
 
 Need to change in [Dockerfile](./src/emailservice/Dockerfile):
 ```console
@@ -80,7 +80,7 @@ for changes in kubernetes manifest file
 ref: [Emailservice](./kubernetes-manifests/emailservice.yaml)
 
 
-**For .Net**
+**.Net**
 
 Need to change in [Dockerfile](./src/cartservice/src/Dockerfile):
 ```
@@ -90,7 +90,7 @@ ENTRYPOINT ["pyroscope", "exec", "-spy-name", "dotnetspy", "/app/cartservice"]
 for changes in kubernetes manifest file 
 ref: [Cartservice](./kubernetes-manifests/cartservice.yaml)
 
-**For Go**
+**Go**
 
 Changes to be done in [main.go](./src/frontend/main.go)
 
@@ -109,7 +109,7 @@ func main() {
 ) 
 ```
 for changes in kubernetes manifest file 
-ref:  [Frontend](./kubernetes-manifests/frontend.yaml.yaml)
+ref:  [Frontend](./kubernetes-manifests/frontend.yaml)
 
 
 ## Microservices we will be profiling using pyroscope
