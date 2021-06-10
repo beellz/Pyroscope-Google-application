@@ -51,12 +51,6 @@ COPY . .
 # this copies pyroscope binary from pyroscope image to your image:
 COPY --from=pyroscope/pyroscope:latest /usr/bin/pyroscope /usr/bin/pyroscope
 
-# this sets the pyroscope server address as well as the app name, make sure you change these:
-ENV PYROSCOPE_SERVER_ADDRESS=http://pyroscope:4040
-ENV PYROSCOPE_APPLICATION_NAME=email.python.app
-
-# this starts your app with pyroscope profiler, make sure to change "python", "manage.py", "runserver" to the actual command
-
 EXPOSE 8080
 CMD [ "pyroscope", "exec", "python", "email_server.py" ]
 
