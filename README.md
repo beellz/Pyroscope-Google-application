@@ -1,46 +1,57 @@
 
+
 ## Google-microservice with pyroscope
 To use Google-microservice with pyroscope we need to do few steps mentioned below 
 
-### Docker Images
-Docker images needs to build and pushed to a repositories. (Currently it is in docekrHub under beellzrocks)
-Dockerfile of each microservice is stored inside their repective folder under src folder. 
-adding into Dockerfile
+### Retagging Docker Images
+Docker images need to build and pushed to repositories. (Currently, it is in DockerHub under beellzrocks)\
+Dockerfile of each microservice is stored inside their respective folder under the src folder. \
+To change the docker file and retagging it \
+Follow these steps:
 
-For Python applications:
+For example Email service
+Go to src/emailservice
+
 - add below lines in Dockerfile
 
 ```console
 COPY --from=pyroscope/pyroscope:latest /usr/bin/pyroscope /usr/bin/pyroscope
 CMD [ "pyroscope", "exec", "python", "email_server.py ]
 ```
-- build Docker image using Dockerfile
+
+- build Docker image inside the folder using Dockerfile
 ```console
 docker build . -t <yourRepository/serviceName:version>
 ```
-Change the tag to push into your repository
+- Change the tag to push into your repository
+
+```console
+docker push <yourRepository/serviceName:version>
+```
 
 
+### Kubernetes manifest 
+For the Email service we can find the yaml file inside:
+kubernetes-manifests/emailservice.yaml
 
-## steps to install microservice and profile it using pyroscope
-
-All kubernetes manifest files are present under kubernetes-manifest folder
 emailservice.yaml
-
-      containers:
+```
+   containers:
       - name: server
-        image: beellzrocks/emailservice  #Change the image with your repository image
-        
+        image: beellzrocks/emailservice  #Change the image with your repository tag
+```        
 
-To install pyroscope we are going to use helm chart.
-[Helm](https://helm.sh) must be installed to use the chart.
+## Steps to install microservice and profile it using pyroscope
+
+To install the pyroscope we are going to use the helm chart.\
+ [Helm](https://helm.sh) must be installed to use the chart.\
 Please refer to Helm's [documentation](https://helm.sh/docs/) to get started.
 
-### Get the Repo of Pyrscope
+ Get the Repo of Pyrscope
 ```console
 helm repo add pyroscope-io https://pyroscope-io.github.io/helm-chart
 ```
-### Installing the Chart
+Installing the Chart
 To install the chart with the release name `pyroscope`:
 ```console
 helm install pyroscope pyroscope-io/pyroscope 
@@ -60,8 +71,7 @@ kubectl port-forward svc/pyroscope 8080:4040
 ```
 Now you can access pyroscope UI on http://localhost:8080
 
---------------
-changes we did in order to integrate microservices with pyroscope
+## Changes we did to integrate microservices with pyroscope
 
 For Python
 
@@ -74,9 +84,13 @@ build Docker image using Dockerfile
 ```console
 docker build . -t <yourRepository/serviceName:version>
 ```
-Change the tag to push into your repository
+- Change the tag to push into your repository
 
-In the Kubernetes file under kubernetes-manifests folder
+```console
+docker push <yourRepository/serviceName:version>
+```
+
+In the Kubernetes file under the kubernetes-manifests folder
 emailservice.yaml
 
       containers:
@@ -95,9 +109,15 @@ build Docker image using Dockerfile
 ```console
 docker build . -t <yourRepository/serviceName:version>
 ```
+- Change the tag to push into your repository
+
+```console
+docker push <yourRepository/serviceName:version>
+```
 
 For Go
-changes to be done in Main.go file
+
+Changes to be done in main.go file
 
 ```
 import (
@@ -114,17 +134,27 @@ func main() {
 )	
 ```
 
-## microservices we will be profiling using pyroscope
+- Build Docker image using Dockerfile
+```console
+docker build . -t <yourRepository/serviceName:version>
+```
+- Change the tag to push into your repository
 
-python
+```console
+docker push <yourRepository/serviceName:version>
+```
+
+## Microservices we will be profiling using pyroscope
+
+Python:
 * Recommendationservice	
 * Emailservice
 
-go:
+Go:
 * Frontend
 * Productcatalogservice
 * Shippingservice
 * Checkoutservice
 
-.net 
+.Net: 
 * Cartservice
