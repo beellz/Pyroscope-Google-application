@@ -28,8 +28,8 @@ spec:
       serviceAccountName: default
       containers:
         - name: server
-          image: checkoutservice
-          imagePullPolicy: Never
+          image: beellzrocks/checkoutservice # Change the image with your repository image
+
           ports:
           - containerPort: 5050
           readinessProbe:
@@ -53,6 +53,10 @@ spec:
             value: "currencyservice:7000"
           - name: CART_SERVICE_ADDR
             value: "cartservice:7070"
+          - name: APPLICATION_NAME # Application name shown in the UI
+            value: "checkoutservice.app"
+          - name: SERVER_ADDRESS # To change Pyroscope Server Port change the value
+            value: "http://pyroscope:4040" 
           # - name: DISABLE_STATS
           #   value: "1"
           # - name: DISABLE_TRACING

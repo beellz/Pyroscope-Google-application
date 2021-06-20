@@ -30,8 +30,7 @@ spec:
       serviceAccountName: default
       containers:
         - name: server
-          image: frontend
-          imagePullPolicy: Never
+          image: beellzrocks/frontend # Change the image with your repository image
           ports:
           - containerPort: 8080
           readinessProbe:
@@ -67,6 +66,10 @@ spec:
             value: "checkoutservice:5050"
           - name: AD_SERVICE_ADDR
             value: "adservice:9555"
+          - name: APPLICATION_NAME # Application name shown in the UI
+            value: "frontend.app"
+          - name: SERVER_ADDRESS # To change Pyroscope Server Port change the value
+            value: "http://pyroscope:4040" 
           # # ENV_PLATFORM: One of: local, gcp, aws, azure, onprem
           # # When not set, defaults to "local" unless running in GKE, otherwies auto-sets to gcp 
           # - name: ENV_PLATFORM 

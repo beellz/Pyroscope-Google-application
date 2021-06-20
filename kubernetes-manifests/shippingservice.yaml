@@ -28,13 +28,16 @@ spec:
       serviceAccountName: default
       containers:
       - name: server
-        image: shippingservice
-        imagePullPolicy: Never
+        image: beellzrocks/shippingservice # Change the image with your repository image
         ports:
         - containerPort: 50051
         env:
         - name: PORT
           value: "50051"
+        - name: APPLICATION_NAME # Application name shown in the UI
+          value: "shipping.service.app"
+        - name: SERVER_ADDRESS # To change Pyroscope Server Port change the value
+          value: "http://pyroscope:4040"           
         # - name: DISABLE_STATS
         #   value: "1"
         # - name: DISABLE_TRACING

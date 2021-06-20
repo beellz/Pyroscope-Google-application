@@ -29,8 +29,7 @@ spec:
       terminationGracePeriodSeconds: 5
       containers:
       - name: server
-        image: paymentservice
-        imagePullPolicy: Never
+        image: gcr.io/google-samples/microservices-demo/paymentservice:v0.2.3
         ports:
         - containerPort: 50051
         env:

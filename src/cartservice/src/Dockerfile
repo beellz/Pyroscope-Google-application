@@ -34,9 +34,7 @@ ENV ASPNETCORE_URLS http://*:7070
 
 COPY --from=pyroscope/pyroscope:latest /usr/bin/pyroscope /usr/bin/pyroscope
 
-ENV PYROSCOPE_APPLICATION_NAME=cart.dotnet.app
-ENV PYROSCOPE_SERVER_ADDRESS=http://pyroscope:4040/
-ENV PYROSCOPE_LOG_LEVEL=debug
+
 ENTRYPOINT ["pyroscope", "exec", "-spy-name", "dotnetspy", "/app/cartservice"]
 
 

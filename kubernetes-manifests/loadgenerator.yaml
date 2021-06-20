@@ -32,17 +32,12 @@ spec:
       restartPolicy: Always
       containers:
       - name: main
-        image: loadgenerator
-        imagePullPolicy: Never
+        image: gcr.io/google-samples/microservices-demo/loadgenerator:v0.2.3
         env:
         - name: FRONTEND_ADDR
           value: "frontend:80"
         - name: USERS
-          value: "10"
-        securityContext:          
-          capabilities:
-            add:
-            - SYS_PTRACE   
+          value: "10" 
         resources:
           requests:
             cpu: 300m
